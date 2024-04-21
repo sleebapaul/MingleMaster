@@ -66,19 +66,22 @@ class VoiceRecognitionGoogleApiRepository(
                             apiKey = ""
                         )
 
-                        val prompt = """Based on following considerations return if there is an awkward silence in the transcript mentioned in triple quotes. You must return just "Yes" or "No". 
-                
+                        val prompt = """Based on following considerations return if there is an awkward silence in the transcript mentioned in triple quotes. You must return just "Yes" or "No".
+
                         1. A sudden drop in sentiment score (positive to neutral or negative) could indicate a shift in conversation, potentially leading to silence.
-                        
+
                         2. Analyze audio properties like pauses, speech rate, and disfluencies ("um," "uh").
-                        
+
                         3. Longer pauses than the average conversation flow could indicate silence.
-                        
+
                         4. Sudden drops in speech rate or increased disfluencies might suggest someone searching for words, potentially leading to silence.
-                        
+
                         5. Analyze transitions between topics. A sudden shift without proper conclusion might suggest an awkward pause.
-                        
+
                         6. Pay attention to neutral scores too. A string of neutral sentences might suggest a lack of engagement, possibly leading to an awkward pause.
+                        
+                        7. If no transcript to process, it must be awkward silence. 
+                        
                         /"/"/" $text /"/"/"  """
 
 
@@ -161,10 +164,10 @@ class VoiceRecognitionGoogleApiRepository(
             StreamingRecognitionConfig.newBuilder()
                 .setConfig(
                     RecognitionConfig.newBuilder()
-                        .addSpeechContexts(
-                            SpeechContext.newBuilder()
-                                .addAllPhrases(VoiceCommandEntity.getAllCommands())
-                        )
+//                        .addSpeechContexts(
+//                            SpeechContext.newBuilder()
+//                                .addAllPhrases(VoiceCommandEntity.getAllCommands())
+//                        )
                         .setLanguageCode(Constants.LANGUAGE_CODE)
                         .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
                         .setSampleRateHertz(Constants.SAMPLE_RATE)

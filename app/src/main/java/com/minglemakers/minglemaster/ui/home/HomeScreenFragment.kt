@@ -46,13 +46,8 @@ class HomeScreenFragment :
     }
 
     override fun commandProcessing(command: VoiceCommandEntity) {
-        when (command) {
-            VoiceCommandEntity.YES ->
-//                navigateTo(HomeScreenFragmentDirections.actionHomeScreenFragmentToSettingsScreenFragment())
-            speakOut("There is An Interruption")                
-
-            else -> super.commandProcessing(command)
-        }
+        if (command.command == "Yes")
+            speakOut("Awkward Silence Detected")
     }
 
     override fun navigateNext() {

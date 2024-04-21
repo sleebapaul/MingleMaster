@@ -31,7 +31,7 @@ abstract class VoiceManagedFragment<T : VoiceManagedViewModel>(
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.commandState.collect {
-                        requireContext().toast(it.toString())
+                        requireContext().toast(it.command)
                         commandProcessing(it)
                     }
                 }
